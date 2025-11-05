@@ -1,4 +1,4 @@
-namespace MiniGameCollection.Games2025.Team00
+namespace MiniGameCollection.Games2025.Team06
 {
     public enum PlayerID
     {
