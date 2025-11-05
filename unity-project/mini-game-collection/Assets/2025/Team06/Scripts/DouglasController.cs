@@ -11,6 +11,7 @@ namespace MiniGameCollection.Games2025.Team06
     {
 
         UnityEngine.Vector2 movementInput;
+        [SerializeField] public float keysCollected;
         [SerializeField] public float dougSpeed;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
