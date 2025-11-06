@@ -12,7 +12,7 @@ namespace MiniGameCollection.Games2025.Team06
 
         public bool canEat = false;
         UnityEngine.Vector2 movementInput;
-        [SerializeField] public float ratSpeed;
+        public float ratSpeed;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] GameObject followerPrefab;

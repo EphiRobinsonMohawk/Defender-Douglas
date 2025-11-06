@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8053948980268033784}
   - component: {fileID: 1938531616889195952}
   - component: {fileID: 7001579034178726747}
+  - component: {fileID: 2558617700221838758}
   m_Layer: 0
   m_Name: 2025-team06-douglas
   m_TagString: Untagged
@@ -172,6 +173,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MiniGameManager>k__BackingField: {fileID: 0}
+  otherPlayer: {fileID: 6372102554349188432, guid: 70a3b7db881193c4e9024f62791190ac,
+    type: 3}
+  originalRatSpeed: 0
+  gunActive: 0
+  attackReady: 0
+  attackCooldown: 0
+  attackTimer: 0
+  slowReady: 0
+  slowCooldown: 0
+  slowTimer: 0
+  ratSlowed: 0
+  ratSlowTimer: 0
+  ratSlowDuration: 0
+  ratSlowSpeed: 0
+  keysCollected: 0
   dougSpeed: 5
   PlayerID: 1
   rb2d: {fileID: 8053948980268033784}
+  ratsInRange: []
+--- !u!70 &2558617700221838758
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276174460919481519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0051895976, y: -0.072658}
+  m_Size: {x: 1.3632885, y: 1.539744}
+  m_Direction: 0

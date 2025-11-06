@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8053948980268033784}
   - component: {fileID: 463114590173089771}
   - component: {fileID: 6372102554349188432}
+  - component: {fileID: -7156951286716177794}
   m_Layer: 0
   m_Name: 2025-team06-rat-king
   m_TagString: Untagged
@@ -169,3 +170,16 @@ MonoBehaviour:
   followerPrefab: {fileID: 1500042548940459533, guid: 2500c303d5d001047a38fd10d9a7c9be,
     type: 3}
   foodToEat: {fileID: 0}
+--- !u!114 &-7156951286716177794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276174460919481519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbb1962ff2d8064ea9ebdfd5c08973a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MiniGameManager>k__BackingField: {fileID: 0}
