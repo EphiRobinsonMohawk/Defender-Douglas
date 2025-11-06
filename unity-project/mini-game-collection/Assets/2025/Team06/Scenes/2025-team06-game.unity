@@ -974,9 +974,20 @@ PrefabInstance:
       objectReference: {fileID: 1313018271}
     - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}
+      propertyPath: gunActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
       propertyPath: otherPlayer
       value: 
       objectReference: {fileID: 1313018271}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 8747678947921967342, guid: fda1fa7ad26760147bc7b820be779adf,
+        type: 3}
     - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}
       propertyPath: ratSlowSpeed
@@ -1145,11 +1156,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8383870647401015971, guid: 5d54dedebd6a93b4d99e3d2a560e3977,
-        type: 3}
-      propertyPath: <MiniGameManager>k__BackingField
-      value: 
-      objectReference: {fileID: 812188702}
     - target: {fileID: 8747678947921967342, guid: 5d54dedebd6a93b4d99e3d2a560e3977,
         type: 3}
       propertyPath: m_Name
@@ -1812,11 +1818,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8383870647401015971, guid: 5d54dedebd6a93b4d99e3d2a560e3977,
-        type: 3}
-      propertyPath: <MiniGameManager>k__BackingField
-      value: 
-      objectReference: {fileID: 812188702}
     - target: {fileID: 8747678947921967342, guid: 5d54dedebd6a93b4d99e3d2a560e3977,
         type: 3}
       propertyPath: m_Name

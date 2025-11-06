@@ -11,9 +11,12 @@ namespace MiniGameCollection.Games2025.Team06
     {
 
         UnityEngine.Vector2 movementInput;
+
+        [SerializeField] public GameObject bulletPrefab;
+        [SerializeField] public GameObject gun;
         [SerializeField] public RatController mainRat;
         [SerializeField] public float originalRatSpeed;
-        [SerializeField] public bool gunActive;
+        [SerializeField] public bool gunActive = false;
         [SerializeField] private bool attackReady;
         [SerializeField] public float attackCooldown;
         [SerializeField] private float attackTimer;
@@ -28,7 +31,12 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public float dougSpeed;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
+        [SerializeField] private float bulletSpeed = 10f;
+        [SerializeField] private UnityEngine.Vector2 lastDirection = UnityEngine.Vector2.right;
 
+        [SerializeField] public float offsetRange = 1f;
+        [SerializeField] private bool isFiring;
+        [SerializeField] private int fireCount;
         [SerializeField] public List<GameObject> ratsInRange = new();
 
 
@@ -51,6 +59,23 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 Bark();
             }
+            
+            if (isFiring)
+            {
+                fireCount++;
+                if (fireCount == 15 || fireCount == 30 || fireCount == 45 || fireCount == 60 || fireCount == 75 || fireCount == 90)
+                {
+                    Fire();
+                }
+                else if (fireCount >= 91)
+                {
+                    isFiring = false;
+                    fireCount = 0;
+                }
+            }
+
+
+
 
             //Attack timer logic
             if (!attackReady)
@@ -93,8 +118,10 @@ namespace MiniGameCollection.Games2025.Team06
             //Gun activation logic
             if (!gunActive)
             {
-                if (keysCollected <= 3)
+                gun.SetActive(false);
+                if (keysCollected >= 3)
                 {
+                    gun.SetActive(true);
                     gunActive = true;
                 }
 
@@ -103,7 +130,7 @@ namespace MiniGameCollection.Games2025.Team06
         
         void Chomp()
         {
-            if (attackReady && ratsInRange.Count > 0)
+            if (!gunActive && attackReady && ratsInRange.Count > 0)
             {
                 GameObject rat = ratsInRange[0];
                 ratsInRange.RemoveAt(0);
@@ -114,6 +141,15 @@ namespace MiniGameCollection.Games2025.Team06
                 attackReady = false;
                 attackTimer = 0;
                 Debug.Log("Bite hits");
+            }
+            else if (gunActive && attackReady)
+            {
+                //Insantiating bullet + inheriting player's velocity (so you can choose firing direction)
+                isFiring = true;
+                //Reseting attack timer
+                attackReady = false;
+                attackTimer = 0;
+                Debug.Log("Gun Fires");
             }
             else
             {
@@ -140,6 +176,29 @@ namespace MiniGameCollection.Games2025.Team06
                 Debug.Log("Bark Misses");
             }
 
+        }
+
+        void Fire()
+        {
+            UnityEngine.Vector2 dir = rb2d.velocity;
+            if (dir == UnityEngine.Vector2.zero)
+            {
+                dir = lastDirection;               // use last aim if not moving
+            }
+            else
+            {
+                lastDirection = dir.normalized;    // remember this direction
+            }
+            UnityEngine.Vector2 randomOffset = new UnityEngine.Vector2
+            (
+            Random.Range(-offsetRange, offsetRange),
+            Random.Range(-offsetRange, offsetRange)
+            );
+            UnityEngine.Vector2 spawnPos = (UnityEngine.Vector2)transform.position + randomOffset;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            GameObject bullet = Instantiate(bulletPrefab, spawnPos, UnityEngine.Quaternion.Euler(0f, 0f, angle + 270));
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = rb2d.velocity + dir.normalized * bulletSpeed;
         }
 
         void OnTriggerEnter2D(Collider2D collision)
