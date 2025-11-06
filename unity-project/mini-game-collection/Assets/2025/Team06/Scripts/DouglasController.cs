@@ -14,14 +14,14 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public RatController mainRat;
         [SerializeField] public float originalRatSpeed;
         [SerializeField] public bool gunActive;
-        [SerializeField] public bool attackReady;
+        [SerializeField] private bool attackReady;
         [SerializeField] public float attackCooldown;
-        [SerializeField] public float attackTimer;
-        [SerializeField] public bool slowReady;
+        [SerializeField] private float attackTimer;
+        [SerializeField] private bool slowReady;
         [SerializeField] public float slowCooldown;
-        [SerializeField] public float slowTimer;
-        [SerializeField] public bool ratSlowed;
-        [SerializeField] public float ratSlowTimer;
+        [SerializeField] private float slowTimer;
+        [SerializeField] private bool ratSlowed;
+        [SerializeField] private float ratSlowTimer;
         [SerializeField] public float ratSlowDuration;
         [SerializeField] public float ratSlowSpeed;
         [SerializeField] public float keysCollected;
@@ -75,7 +75,7 @@ namespace MiniGameCollection.Games2025.Team06
             //Slow duration logic
             if (ratSlowed)
             {
-                mainRat.ratSpeed = 2;
+                mainRat.ratSpeed = ratSlowSpeed;
                 ratSlowTimer += Time.deltaTime;
                 if (ratSlowTimer >= ratSlowDuration)
                 {

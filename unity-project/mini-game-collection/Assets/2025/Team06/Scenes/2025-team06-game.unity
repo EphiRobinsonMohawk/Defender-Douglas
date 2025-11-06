@@ -979,6 +979,26 @@ PrefabInstance:
       objectReference: {fileID: 1313018271}
     - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}
+      propertyPath: ratSlowSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: slowCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: ratSlowDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001579034178726747, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
       propertyPath: <MiniGameManager>k__BackingField
       value: 
       objectReference: {fileID: 812188702}

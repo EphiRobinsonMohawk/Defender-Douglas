@@ -12,7 +12,7 @@ namespace MiniGameCollection.Games2025.Team06
 
         public bool canEat = false;
         UnityEngine.Vector2 movementInput;
-        public float ratSpeed;
+        [SerializeField] public float ratSpeed;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] GameObject followerPrefab;
@@ -27,7 +27,7 @@ namespace MiniGameCollection.Games2025.Team06
             movementInput = new UnityEngine.Vector2(axisX, axisY);
             movementInput.Normalize();
             rb2d.velocity = movementInput * ratSpeed;
-
+            Debug.Log(ratSpeed);
 
             if (canEat && ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
             {
