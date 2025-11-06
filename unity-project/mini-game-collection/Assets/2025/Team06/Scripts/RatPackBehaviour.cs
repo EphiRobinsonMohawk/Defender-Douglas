@@ -23,10 +23,13 @@ namespace MiniGameCollection.Games2025.Team06
         // Update is called once per frame
         void Update()
         {
-            direction.x = ratKing.gameObject.transform.position.x - rb2d.position.x;
-            direction.y = ratKing.gameObject.transform.position.y - rb2d.position.y;
-            direction.Normalize();
-            rb2d.velocity = direction * followerSpeed;
+            if (ratKing != null)
+            {
+                direction.x = ratKing.gameObject.transform.position.x - rb2d.position.x;
+                direction.y = ratKing.gameObject.transform.position.y - rb2d.position.y;
+                direction.Normalize();
+                rb2d.velocity = direction * followerSpeed;
+            }
            
             
         }
