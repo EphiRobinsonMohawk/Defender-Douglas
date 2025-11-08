@@ -42,8 +42,13 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] private bool isFiring;
         [SerializeField] private int fireCount;
         [SerializeField] public List<GameObject> ratsInRange = new();
+        public TwoPlayerCamera twoPlayerCamera;
 
 
+        void Start()
+        {
+            twoPlayerCamera = FindAnyObjectByType<TwoPlayerCamera>();
+        }
         // Update is called once per frame
         void Update()
         {
@@ -223,6 +228,7 @@ namespace MiniGameCollection.Games2025.Team06
 
         void Die()
         {
+            twoPlayerCamera.targets.Remove(transform);
             Destroy(gameObject);
         }
 

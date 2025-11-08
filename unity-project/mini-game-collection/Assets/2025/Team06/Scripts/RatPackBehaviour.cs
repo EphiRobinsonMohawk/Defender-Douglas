@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using MiniGameCollection;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace MiniGameCollection.Games2025.Team06
 {
@@ -10,6 +12,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public GameObject ratKing;
         [SerializeField] public float followerSpeed;
         [SerializeField] Rigidbody2D rb2d;
+        public TwoPlayerCamera twoPlayerCamera;
         public Vector2 direction;
         public float maxDistance;
         
@@ -18,7 +21,9 @@ namespace MiniGameCollection.Games2025.Team06
 
         void Awake()
         {
+            twoPlayerCamera = FindAnyObjectByType<TwoPlayerCamera>();
             ratKing = GameObject.Find("2025-team06-rat-king");
+            twoPlayerCamera.targets.Add(transform);
         }
         // Update is called once per frame
         void Update()
@@ -30,8 +35,13 @@ namespace MiniGameCollection.Games2025.Team06
                 direction.Normalize();
                 rb2d.velocity = direction * followerSpeed;
             }
-           
-            
+
+
+        }
+
+        void OnDestroy()
+        {
+            twoPlayerCamera.targets.Remove(transform);
         }
     }
 }
