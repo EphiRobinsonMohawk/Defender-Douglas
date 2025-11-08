@@ -28,7 +28,6 @@ namespace MiniGameCollection.Games2025.Team06
             movementInput.Normalize();
             rb2d.velocity = movementInput * ratSpeed;
 
-
             if (canEat && ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
             {
                 EatFood();
