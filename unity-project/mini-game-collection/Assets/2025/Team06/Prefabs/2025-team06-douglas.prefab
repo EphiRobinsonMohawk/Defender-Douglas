@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MiniGameManager>k__BackingField: {fileID: 0}
+  bulletPrefab: {fileID: 0}
   gun: {fileID: 1981363703245769812}
   mainRat: {fileID: 0}
   originalRatSpeed: 0
@@ -288,8 +289,17 @@ MonoBehaviour:
   ratSlowSpeed: 0
   keysCollected: 0
   dougSpeed: 5
+  iFrames: 0
+  iFramesMax: 1.5
+  invincible: 0
+  dougHealth: 10
   PlayerID: 1
   rb2d: {fileID: 8053948980268033784}
+  bulletSpeed: 10
+  lastDirection: {x: 1, y: 0}
+  offsetRange: 1
+  isFiring: 0
+  fireCount: 0
   ratsInRange: []
 --- !u!70 &2558617700221838758
 CapsuleCollider2D:

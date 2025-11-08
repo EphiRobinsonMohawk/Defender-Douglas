@@ -29,6 +29,10 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public float ratSlowSpeed;
         [SerializeField] public float keysCollected;
         [SerializeField] public float dougSpeed;
+        [SerializeField] public float iFrames;
+        [SerializeField] public float iFramesMax;
+        [SerializeField] public bool invincible;
+        [SerializeField] public int dougHealth;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] private float bulletSpeed = 10f;
@@ -43,6 +47,11 @@ namespace MiniGameCollection.Games2025.Team06
         // Update is called once per frame
         void Update()
         {
+            //Death Logic
+            if(dougHealth <= 0)
+            {
+                Die();
+            }
             float axisX = ArcadeInput.Players[(int)PlayerID].AxisX;
             float axisY = ArcadeInput.Players[(int)PlayerID].AxisY;
             movementInput = new UnityEngine.Vector2(axisX, axisY);
@@ -59,7 +68,7 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 Bark();
             }
-            
+
             if (isFiring)
             {
                 fireCount++;
@@ -110,6 +119,17 @@ namespace MiniGameCollection.Games2025.Team06
                 }
             }
 
+            //IFrame timer logic
+            if (invincible)
+            {
+                iFrames += Time.deltaTime;
+                if (iFrames >= iFramesMax)
+                {
+                    invincible = false;
+                    iFrames = 0;
+                }
+            }
+
             else if (!ratSlowed)
             {
                 originalRatSpeed = mainRat.ratSpeed;
@@ -127,7 +147,7 @@ namespace MiniGameCollection.Games2025.Team06
 
             }
         }
-        
+
         void Chomp()
         {
             if (!gunActive && attackReady && ratsInRange.Count > 0)
@@ -201,10 +221,18 @@ namespace MiniGameCollection.Games2025.Team06
             bulletRb.velocity = rb2d.velocity + dir.normalized * bulletSpeed;
         }
 
+        void Die()
+        {
+            Destroy(gameObject);
+        }
+
         void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.GetComponent<RatTag>() != null)
             {
+
+
+                //Bite Logic
                 GameObject rat = collision.gameObject;
                 if (!ratsInRange.Contains(rat)) //prevents adding collided rat twice
                 {
@@ -222,6 +250,21 @@ namespace MiniGameCollection.Games2025.Team06
             }
         }
 
+        void OnTriggerStay2D(Collider2D collision)
+        {
+            if(collision.GetComponent<RatTag>() != null)
+            {
+                //Damage Logic
+                if(!invincible)
+                {
+                    dougHealth -= 1;
+                    invincible = true;
+                    Debug.Log("Douglas has " + dougHealth + "HP");
+                }
+            }
+        }
     }
+    
+        
 
 }
