@@ -12,11 +12,16 @@ namespace MiniGameCollection.Games2025.Team06
 
         UnityEngine.Vector2 movementInput;
 
+
+        [SerializeField] public GameObject fence;
         [SerializeField] public GameObject bulletPrefab;
         [SerializeField] public GameObject gun;
         [SerializeField] public RatController mainRat;
         [SerializeField] public float originalRatSpeed;
+
+        [SerializeField] public bool gateOpen = false;
         [SerializeField] public bool gunActive = false;
+        [SerializeField] private bool opened;
         [SerializeField] private bool attackReady;
         [SerializeField] public float attackCooldown;
         [SerializeField] private float attackTimer;
@@ -52,6 +57,18 @@ namespace MiniGameCollection.Games2025.Team06
         // Update is called once per frame
         void Update()
         {
+            //Gate Logic
+            if (gateOpen && !opened)
+            {
+                fence.SetActive(false);
+                opened = true;
+            }
+
+            if (keysCollected >= 3)
+            {
+                gateOpen = true;
+            }
+
             //Death Logic
             if(dougHealth <= 0)
             {
@@ -141,25 +158,36 @@ namespace MiniGameCollection.Games2025.Team06
             }
 
             //Gun activation logic
-            if (!gunActive)
-            {
-                gun.SetActive(false);
-                if (keysCollected >= 3)
+                if (gunActive)
                 {
                     gun.SetActive(true);
-                    gunActive = true;
                 }
 
-            }
+            
         }
 
         void Chomp()
         {
-            if (!gunActive && attackReady && ratsInRange.Count > 0)
+            if (!gunActive && attackReady && ratsInRange.Count > 0 && mainRat != null)
             {
-                GameObject rat = ratsInRange[0];
-                ratsInRange.RemoveAt(0);
-                Destroy(rat);
+                if (ratsInRange[0] == mainRat)
+                {
+                    GameObject rat = ratsInRange[1];
+                    ratsInRange.RemoveAt(1);
+                    Destroy(rat);
+                }
+                else if (ratsInRange[0] != mainRat)
+                {
+                    GameObject rat = ratsInRange[0];
+                    ratsInRange.RemoveAt(0);
+                    Destroy(rat);
+                }
+                else if (ratsInRange[0] == mainRat && ratsInRange.Count < 2)
+                {
+                    GameObject rat = ratsInRange[0];
+                    ratsInRange.RemoveAt(0);
+                    Destroy(rat);
+                }
 
                 //Reseting attack timer
 
@@ -245,6 +273,11 @@ namespace MiniGameCollection.Games2025.Team06
                     ratsInRange.Add(rat);   //adding collided rat to ratsInRange list
 
                 }
+            }
+
+            if (collision.gameObject.name == "2025-team06-gun")
+            {
+                gunActive = true;
             }
         }
 

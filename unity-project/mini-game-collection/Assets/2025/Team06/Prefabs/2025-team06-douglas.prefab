@@ -109,9 +109,9 @@ GameObject:
   - component: {fileID: 408988499500312474}
   - component: {fileID: 680356247461111962}
   - component: {fileID: 8053948980268033784}
-  - component: {fileID: 1938531616889195952}
   - component: {fileID: 7001579034178726747}
   - component: {fileID: 2558617700221838758}
+  - component: {fileID: 25657344229286522}
   m_Layer: 0
   m_Name: 2025-team06-douglas
   m_TagString: Untagged
@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 6276174460919481519}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.874, y: -0.299, z: 0}
+  m_LocalPosition: {x: -1.874, y: -0.3533, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -181,7 +181,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8914033}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -214,51 +214,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1938531616889195952
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6276174460919481519}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0030329227, y: -0.10311878}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 2
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.67851186, y: 0.79376245}
-  m_EdgeRadius: 0
 --- !u!114 &7001579034178726747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,11 +227,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MiniGameManager>k__BackingField: {fileID: 0}
+  fence: {fileID: 0}
   bulletPrefab: {fileID: 0}
   gun: {fileID: 1981363703245769812}
   mainRat: {fileID: 0}
   originalRatSpeed: 0
   gunActive: 0
+  opened: 0
   attackReady: 0
   attackCooldown: 0
   attackTimer: 0
@@ -301,6 +258,7 @@ MonoBehaviour:
   isFiring: 0
   fireCount: 0
   ratsInRange: []
+  twoPlayerCamera: {fileID: 0}
 --- !u!70 &2558617700221838758
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -333,6 +291,41 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0051895976, y: -0.072658}
-  m_Size: {x: 1.3632885, y: 1.539744}
+  m_Offset: {x: 0.003195703, y: 0.014239669}
+  m_Size: {x: 1.6862994, y: 1.8833683}
   m_Direction: 0
+--- !u!70 &25657344229286522
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276174460919481519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.020675765, y: -0.13130806}
+  m_Size: {x: 0.6026189, y: 0.6026189}
+  m_Direction: 1
