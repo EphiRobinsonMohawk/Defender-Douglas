@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MiniGameCollection;
@@ -12,9 +13,13 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public GameObject ratKing;
         [SerializeField] public float followerSpeed;
         [SerializeField] Rigidbody2D rb2d;
+        [SerializeField] public Animator animator;
         public TwoPlayerCamera twoPlayerCamera;
         public Vector2 direction;
         public float maxDistance;
+        public bool defeated = false;
+        bool canMove = true;
+
         
         
 
@@ -28,7 +33,12 @@ namespace MiniGameCollection.Games2025.Team06
         // Update is called once per frame
         void Update()
         {
-            if (ratKing != null)
+            if(defeated)
+            {
+                canMove = false;
+                animator.SetBool("defeated", true);
+            }
+            if (ratKing != null && canMove)
             {
                 direction.x = ratKing.gameObject.transform.position.x - rb2d.position.x;
                 direction.y = ratKing.gameObject.transform.position.y - rb2d.position.y;
@@ -36,12 +46,19 @@ namespace MiniGameCollection.Games2025.Team06
                 rb2d.velocity = direction * followerSpeed;
             }
 
-
+            animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
         }
 
         void OnDestroy()
         {
             twoPlayerCamera.targets.Remove(transform);
+        }
+
+        void Defeat()
+        {
+            Debug.Log("ratpack death");
+            twoPlayerCamera.targets.Remove(transform);
+            Destroy(gameObject);
         }
     }
 }

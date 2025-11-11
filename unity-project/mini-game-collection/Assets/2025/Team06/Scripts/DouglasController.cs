@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using MiniGameCollection.Games2025.Team00;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,8 +13,6 @@ namespace MiniGameCollection.Games2025.Team06
     {
 
         UnityEngine.Vector2 movementInput;
-
-
         [SerializeField] public GameObject fence;
         [SerializeField] public GameObject bulletPrefab;
         [SerializeField] public GameObject gun;
@@ -48,6 +48,10 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] private int fireCount;
         [SerializeField] public List<GameObject> ratsInRange = new();
         public TwoPlayerCamera twoPlayerCamera;
+        [SerializeField] public TMP_Text keyCounter;
+        [SerializeField] public Animator animator;
+        public bool defeated = false;
+        public bool canMove = true;
 
 
         void Start()
@@ -70,15 +74,23 @@ namespace MiniGameCollection.Games2025.Team06
             }
 
             //Death Logic
-            if(dougHealth <= 0)
+            if (dougHealth <= 0)
             {
-                Die();
+                defeated = true;
+                animator.SetBool("defeated", true);
+                canMove = false;
             }
-            float axisX = ArcadeInput.Players[(int)PlayerID].AxisX;
-            float axisY = ArcadeInput.Players[(int)PlayerID].AxisY;
-            movementInput = new UnityEngine.Vector2(axisX, axisY);
-            movementInput.Normalize();
-            rb2d.velocity = movementInput * dougSpeed;
+            if (canMove)
+            {
+                float axisX = ArcadeInput.Players[(int)PlayerID].AxisX;
+                float axisY = ArcadeInput.Players[(int)PlayerID].AxisY;
+                movementInput = new UnityEngine.Vector2(axisX, axisY);
+                movementInput.Normalize();
+                rb2d.velocity = movementInput * dougSpeed;
+            }
+
+            animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
+            
             ratsInRange.RemoveAll(go => go == null);
 
             if (ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
@@ -105,7 +117,8 @@ namespace MiniGameCollection.Games2025.Team06
                 }
             }
 
-
+            //Key UI
+            keyCounter.text = "x" + keysCollected;
 
 
             //Attack timer logic
@@ -174,19 +187,64 @@ namespace MiniGameCollection.Games2025.Team06
                 {
                     GameObject rat = ratsInRange[1];
                     ratsInRange.RemoveAt(1);
-                    Destroy(rat);
+                    mainRat.ratCount -= 1;
+                    mainRat.ratCounter.text = "x" + mainRat.ratCount;
+                    if (rat.GetComponent<RatPackBehaviour>() != null)
+                    {
+                        RatPackBehaviour ratPack = rat.GetComponent<RatPackBehaviour>();
+                        ratPack.defeated = true;
+                    }
+                    else if (rat.GetComponent<RatController>() != null)
+                    {
+                        RatController ratKing = rat.GetComponent<RatController>();
+                        ratKing.defeated = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Rat script check failed");
+                    }
                 }
                 else if (ratsInRange[0] != mainRat)
                 {
                     GameObject rat = ratsInRange[0];
                     ratsInRange.RemoveAt(0);
-                    Destroy(rat);
+                    mainRat.ratCount -= 1;
+                    mainRat.ratCounter.text = "x" + mainRat.ratCount;
+                    if (rat.GetComponent<RatPackBehaviour>() != null)
+                    {
+                        RatPackBehaviour ratPack = rat.GetComponent<RatPackBehaviour>();
+                        ratPack.defeated = true;
+                    }
+                    else if (rat.GetComponent<RatController>() != null)
+                    {
+                        RatController ratKing = rat.GetComponent<RatController>();
+                        ratKing.defeated = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Rat script check failed");
+                    }
                 }
                 else if (ratsInRange[0] == mainRat && ratsInRange.Count < 2)
                 {
                     GameObject rat = ratsInRange[0];
                     ratsInRange.RemoveAt(0);
-                    Destroy(rat);
+                    mainRat.ratCount -= 1;
+                    mainRat.ratCounter.text = "x" + mainRat.ratCount;
+                    if (rat.GetComponent<RatPackBehaviour>() != null)
+                    {
+                        RatPackBehaviour ratPack = rat.GetComponent<RatPackBehaviour>();
+                        ratPack.defeated = true;
+                    }
+                    else if (rat.GetComponent<RatController>() != null)
+                    {
+                        RatController ratKing = rat.GetComponent<RatController>();
+                        ratKing.defeated = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Rat script check failed");
+                    }
                 }
 
                 //Reseting attack timer
@@ -244,8 +302,8 @@ namespace MiniGameCollection.Games2025.Team06
             }
             UnityEngine.Vector2 randomOffset = new UnityEngine.Vector2
             (
-            Random.Range(-offsetRange, offsetRange),
-            Random.Range(-offsetRange, offsetRange)
+            UnityEngine.Random.Range(-offsetRange, offsetRange),
+            UnityEngine.Random.Range(-offsetRange, offsetRange)
             );
             UnityEngine.Vector2 spawnPos = (UnityEngine.Vector2)transform.position + randomOffset;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -254,10 +312,13 @@ namespace MiniGameCollection.Games2025.Team06
             bulletRb.velocity = rb2d.velocity + dir.normalized * bulletSpeed;
         }
 
-        void Die()
+
+        void Defeat()
         {
+            Debug.Log("doug death");
             twoPlayerCamera.targets.Remove(transform);
             Destroy(gameObject);
+            MiniGameManager.StopGame();
         }
 
         void OnTriggerEnter2D(Collider2D collision)

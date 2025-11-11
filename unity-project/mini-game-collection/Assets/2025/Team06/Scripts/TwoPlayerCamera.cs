@@ -126,19 +126,19 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 int roundedFloat = (int)bounds.size.y * 50;
                 //roundedFloat += 50;
-                Debug.Log("roundedFloat " + roundedFloat);
+                //Debug.Log("roundedFloat " + roundedFloat);
                 return roundedFloat;
             }
             if (bounds.size.x >= bounds.size.y)
             {
                 int roundedFloat = (int)bounds.size.x * 50;
-                Debug.Log("roundedFloat " + roundedFloat);
+                //Debug.Log("roundedFloat " + roundedFloat);
                 return roundedFloat;
             }
             else
             {
                 int roundedFloat = (int)bounds.size.x * 50;
-                Debug.Log("roundedFloat " + roundedFloat);
+                //Debug.Log("roundedFloat " + roundedFloat);
                 roundedFloat += 100;
                 return roundedFloat;
             }
