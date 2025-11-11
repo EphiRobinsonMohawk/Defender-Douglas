@@ -130,7 +130,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MiniGameManager>k__BackingField: {fileID: 0}
   canEat: 0
+  twoPlayerCamera: {fileID: 0}
   ratSpeed: 4
   PlayerID: 0
   rb2d: {fileID: 8053948980268033784}

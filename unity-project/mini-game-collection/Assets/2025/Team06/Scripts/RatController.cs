@@ -12,13 +12,17 @@ namespace MiniGameCollection.Games2025.Team06
 
         public bool canEat = false;
         UnityEngine.Vector2 movementInput;
+        [SerializeField] TwoPlayerCamera twoPlayerCamera;
         [SerializeField] public float ratSpeed;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] GameObject followerPrefab;
         public GameObject foodToEat;
         // Start is called before the first frame update
-
+        void Start()
+        {
+            
+        }
         // Update is called once per frame
         void Update()
         {
@@ -52,7 +56,7 @@ namespace MiniGameCollection.Games2025.Team06
                 foodToEat = collision.gameObject;
             }
         }
-        
+
         void OnTriggerExit2D(Collider2D collision)
         {
             Component component = collision.GetComponent<FoodTag>();
@@ -64,6 +68,11 @@ namespace MiniGameCollection.Games2025.Team06
             }
 
 
+        }
+        
+        void OnDestroy()
+        {
+            twoPlayerCamera.targets.Remove(transform);
         }
     
     }
