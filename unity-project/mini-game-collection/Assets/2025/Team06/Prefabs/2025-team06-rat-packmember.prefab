@@ -168,6 +168,7 @@ MonoBehaviour:
   followerSpeed: 4
   rb2d: {fileID: 2696986504578915114}
   animator: {fileID: 4571541400520579632}
+  sr: {fileID: 4658883059303674442}
   twoPlayerCamera: {fileID: 0}
   direction: {x: 0, y: 0}
   maxDistance: 1

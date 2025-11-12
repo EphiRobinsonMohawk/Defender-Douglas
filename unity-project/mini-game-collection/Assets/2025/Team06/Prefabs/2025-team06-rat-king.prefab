@@ -173,6 +173,7 @@ MonoBehaviour:
   rb2d: {fileID: 1319829013628279947}
   followerPrefab: {fileID: 1500042548940459533, guid: 2500c303d5d001047a38fd10d9a7c9be,
     type: 3}
+  sr: {fileID: 852654299732870026}
   ratCount: 0
   defeated: 0
   deathAnim: 0

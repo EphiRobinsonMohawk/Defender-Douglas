@@ -20,6 +20,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] GameObject followerPrefab;
+        [SerializeField] public SpriteRenderer sr;
         public int ratCount;
         public bool defeated = false;
         public bool deathAnim = false;
@@ -46,6 +47,14 @@ namespace MiniGameCollection.Games2025.Team06
                 movementInput = new UnityEngine.Vector2(axisX, axisY);
                 movementInput.Normalize();
                 rb2d.velocity = movementInput * ratSpeed;
+            }
+            if (rb2d.velocity.x > 0)
+            {
+                sr.flipX = false;
+            }
+            else
+            {
+                sr.flipX = true;
             }
 
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));

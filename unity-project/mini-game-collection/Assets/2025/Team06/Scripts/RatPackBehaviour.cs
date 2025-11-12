@@ -14,6 +14,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public float followerSpeed;
         [SerializeField] Rigidbody2D rb2d;
         [SerializeField] public Animator animator;
+        [SerializeField] public SpriteRenderer sr;
         public TwoPlayerCamera twoPlayerCamera;
         public Vector2 direction;
         public float maxDistance;
@@ -44,6 +45,14 @@ namespace MiniGameCollection.Games2025.Team06
                 direction.y = ratKing.gameObject.transform.position.y - rb2d.position.y;
                 direction.Normalize();
                 rb2d.velocity = direction * followerSpeed;
+            }
+            if (rb2d.velocity.x > 0)
+            {
+                sr.flipX = false;
+            }
+            else
+            {
+                sr.flipX = true;
             }
 
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));

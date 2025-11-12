@@ -166,6 +166,7 @@ MonoBehaviour:
   twoPlayerCamera: {fileID: 0}
   keyCounter: {fileID: 0}
   animator: {fileID: 4135696159958186370}
+  sr: {fileID: 740372648938087857}
   defeated: 0
   canMove: 1
 --- !u!70 &3586956152420442658

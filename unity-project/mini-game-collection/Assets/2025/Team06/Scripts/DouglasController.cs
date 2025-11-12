@@ -50,6 +50,7 @@ namespace MiniGameCollection.Games2025.Team06
         public TwoPlayerCamera twoPlayerCamera;
         [SerializeField] public TMP_Text keyCounter;
         [SerializeField] public Animator animator;
+        [SerializeField] public SpriteRenderer sr;
         public bool defeated = false;
         public bool canMove = true;
 
@@ -90,6 +91,15 @@ namespace MiniGameCollection.Games2025.Team06
             }
 
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
+
+            if (rb2d.velocity.x > 0)
+            {
+                sr.flipX = false;
+            }
+            else
+            {
+                sr.flipX = true;
+            }
             
             ratsInRange.RemoveAll(go => go == null);
 
