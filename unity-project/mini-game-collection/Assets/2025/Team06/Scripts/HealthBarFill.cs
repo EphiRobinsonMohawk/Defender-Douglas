@@ -15,7 +15,6 @@ public class HealthBarFill : MonoBehaviour
     void Update()
     {
         dougHealth = (float)dougScript.dougHealth;
-        healthBar.fillAmount = dougHealth * 0.1f;
-
+        healthBar.fillAmount = dougHealth * 0.02f;
     }
 }

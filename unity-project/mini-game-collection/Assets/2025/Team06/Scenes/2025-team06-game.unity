@@ -2665,7 +2665,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.21
+  orthographic size: 5.4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -8384,6 +8384,11 @@ PrefabInstance:
       propertyPath: mainRat
       value: 
       objectReference: {fileID: 4935975629684071489}
+    - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: dougHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}
       propertyPath: keyCounter
