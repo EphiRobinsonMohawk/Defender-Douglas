@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using MiniGameCollection.Games2025.Team06;
 using UnityEngine;
-
-public class GunScript : MonoBehaviour
+namespace MiniGameCollection.Games2025.Team06
 {
-    // Start is called before the first frame update
-    void OnTriggerEnter2D(Collider2D collision)
+    public class GunScript : MonoBehaviour
     {
-        if (collision.gameObject.name == "2025-team06-douglas")
+        // Start is called before the first frame update
+        void OnTriggerEnter2D(Collider2D collision)
         {
-            Destroy(gameObject);
+            if (collision.gameObject.name == "2025-team06-douglas")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

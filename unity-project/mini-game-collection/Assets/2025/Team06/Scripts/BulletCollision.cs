@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using MiniGameCollection.Games2025.Team06;
 using UnityEngine;
 
-public class BulletCollision : MonoBehaviour
+namespace MiniGameCollection.Games2025.Team06
 {
-    void OnTriggerEnter2D(Collider2D collision)
+    public class BulletCollision : MonoBehaviour
     {
-        if (collision.GetComponent<RatTag>() != null)
+        void OnTriggerEnter2D(Collider2D collision)
         {
-            Destroy(collision.gameObject);
+            if (collision.GetComponent<RatTag>() != null)
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
+
 }
