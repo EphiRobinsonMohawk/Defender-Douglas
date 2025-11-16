@@ -27,6 +27,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public TMP_Text ratCounter;
         public GameObject foodToEat;
         public bool canMove = true;
+        public bool lastFlip;
         // Start is called before the first frame update
         void Start()
         {
@@ -51,10 +52,16 @@ namespace MiniGameCollection.Games2025.Team06
             if (rb2d.velocity.x > 0)
             {
                 sr.flipX = false;
+                lastFlip = false;
+            }
+            else if (rb2d.velocity.x < 0)
+            {
+                sr.flipX = true;
+                lastFlip = true;
             }
             else
             {
-                sr.flipX = true;
+                sr.flipX = lastFlip;
             }
 
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
