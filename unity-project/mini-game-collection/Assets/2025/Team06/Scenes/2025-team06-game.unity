@@ -9186,6 +9186,11 @@ PrefabInstance:
       objectReference: {fileID: 1651178021}
     - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}
+      propertyPath: iFrames
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
       propertyPath: mainRat
       value: 
       objectReference: {fileID: 4935975629684071489}
@@ -9193,6 +9198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dougHealth
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
+        type: 3}
+      propertyPath: iFramesMax
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3811796455195504814, guid: 9b90ad6218167a7448beb452382e29f4,
         type: 3}

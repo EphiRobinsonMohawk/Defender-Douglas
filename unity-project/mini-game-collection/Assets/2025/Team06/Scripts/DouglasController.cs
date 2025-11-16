@@ -37,7 +37,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public float iFrames;
         [SerializeField] public float iFramesMax;
         [SerializeField] public bool invincible;
-        [SerializeField] public int dougHealth;
+        [SerializeField] public float dougHealth;
         [SerializeField] public PlayerID PlayerID;
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] private float bulletSpeed = 10f;
@@ -51,6 +51,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public TMP_Text keyCounter;
         [SerializeField] public Animator animator;
         [SerializeField] public SpriteRenderer sr;
+        public bool lastFlip;
         public bool defeated = false;
         public bool canMove = true;
 
@@ -95,10 +96,16 @@ namespace MiniGameCollection.Games2025.Team06
             if (rb2d.velocity.x > 0)
             {
                 sr.flipX = false;
+                lastFlip = false;
+            }
+            else if (rb2d.velocity.x < 0)
+            {
+                sr.flipX = true;
+                lastFlip = true;
             }
             else
             {
-                sr.flipX = true;
+                sr.flipX = lastFlip;
             }
             
             ratsInRange.RemoveAll(go => go == null);
@@ -365,12 +372,15 @@ namespace MiniGameCollection.Games2025.Team06
             if(collision.GetComponent<RatTag>() != null)
             {
                 //Damage Logic
-                if(!invincible)
-                {
-                    dougHealth -= 1;
-                    invincible = true;
-                    Debug.Log("Douglas has " + dougHealth + "HP");
-                }
+                
+                    if(!invincible)
+                    {
+                        dougHealth -= 0.1f * ratsInRange.Count;
+                        invincible = true;
+                        Debug.Log("Douglas has " + dougHealth + "HP");
+                    }
+                
+                
             }
         }
     }
