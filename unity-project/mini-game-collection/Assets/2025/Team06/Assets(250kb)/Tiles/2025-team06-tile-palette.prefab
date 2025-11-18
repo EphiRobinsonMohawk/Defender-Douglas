@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1648060880126373730}
   - component: {fileID: 2603004374796774443}
   m_Layer: 0
-  m_Name: Team06Palette
+  m_Name: 2025-team06-tile-palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
