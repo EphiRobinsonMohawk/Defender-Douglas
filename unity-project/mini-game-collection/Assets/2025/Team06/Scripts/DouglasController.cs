@@ -113,11 +113,15 @@ namespace MiniGameCollection.Games2025.Team06
             if (ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
             {
                 Chomp();
+
+                //AUDIO GOES HERE
             }
 
             if (ArcadeInput.Players[(int)PlayerID].Action2.Pressed)
             {
                 Bark();
+
+                //AUDIO GOES HERE
             }
 
             if (isFiring)
