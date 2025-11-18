@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace MiniGameCollection.Games2025.Team06
 {
-    
+    //This script just tells the mini game manager who wins and loses. 
+
     public class GameManager : MiniGameBehaviour
     {
         [SerializeField] public RatController rat;
         [SerializeField] public DouglasController douglas;
         [field: SerializeField] public MiniGameManager miniGameManager { get; private set; }
-    
+
         public void Start()
         {
             MiniGameManager.StartGame();
@@ -33,12 +34,9 @@ namespace MiniGameCollection.Games2025.Team06
             else
             {
                 miniGameManager.Winner = MiniGameWinner.Unset;
-                Debug.Log("Victory Con not met, rat is " +rat.defeated + "dog is " +douglas.defeated);
-
+                Debug.Log("Victory Con not met, rat is " + rat.defeated + "dog is " + douglas.defeated);
             }
         }
-
-        
     }
 }
 

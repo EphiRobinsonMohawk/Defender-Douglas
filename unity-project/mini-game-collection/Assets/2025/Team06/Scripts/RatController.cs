@@ -11,9 +11,7 @@ namespace MiniGameCollection.Games2025.Team06
 {
     public class RatController : MiniGameBehaviour
     {
-
-        public bool canEat = false;
-        UnityEngine.Vector2 movementInput;
+        [Header("References")]
         [SerializeField] public Animator animator;
         [SerializeField] TwoPlayerCamera twoPlayerCamera;
         [SerializeField] public float ratSpeed;
@@ -21,26 +19,28 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public Rigidbody2D rb2d;
         [SerializeField] GameObject followerPrefab;
         [SerializeField] public SpriteRenderer sr;
+        [SerializeField] public TMP_Text ratCounter;
+        public GameObject foodToEat;
+
+        [Header("Rat Attributes")]
+        public bool canEat = false;
+        UnityEngine.Vector2 movementInput;
         public int ratCount;
         public bool defeated = false;
         public bool deathAnim = false;
-        [SerializeField] public TMP_Text ratCounter;
-        public GameObject foodToEat;
         public bool canMove = true;
         public bool lastFlip;
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
+
         // Update is called once per frame
         void Update()
         {
+            //Death
             if (defeated && !deathAnim)
             {
                 animator.SetBool("defeated", true);
                 canMove = false;
             }
+            //Movement
             if (canMove)
             {
                 float axisX = ArcadeInput.Players[(int)PlayerID].AxisX;
@@ -49,6 +49,7 @@ namespace MiniGameCollection.Games2025.Team06
                 movementInput.Normalize();
                 rb2d.velocity = movementInput * ratSpeed;
             }
+            //Animations
             if (rb2d.velocity.x > 0)
             {
                 sr.flipX = false;
@@ -63,9 +64,9 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 sr.flipX = lastFlip;
             }
-
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
 
+            //Eat logic.
             if (canEat && ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
             {
                 EatFood();
@@ -79,7 +80,7 @@ namespace MiniGameCollection.Games2025.Team06
             Destroy(gameObject);
             MiniGameManager.StopGame();
         }
-        
+
         void EatFood()
         {
             Instantiate(followerPrefab, transform.position, transform.rotation);
@@ -88,7 +89,7 @@ namespace MiniGameCollection.Games2025.Team06
             Destroy(foodToEat);
         }
 
-
+        //Food collision logic
         void OnTriggerEnter2D(Collider2D collision)
         {
             Debug.Log("Collided with " + collision.gameObject.name);
@@ -110,13 +111,6 @@ namespace MiniGameCollection.Games2025.Team06
                 canEat = false;
                 foodToEat = null;
             }
-
-
         }
-
-        
-        
-    
     }
-
 }

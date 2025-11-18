@@ -11,46 +11,54 @@ namespace MiniGameCollection.Games2025.Team06
 {
     public class DouglasController : MiniGameBehaviour
     {
-
+        [Header("References")]
         UnityEngine.Vector2 movementInput;
         [SerializeField] public GameObject fence;
         [SerializeField] public GameObject bulletPrefab;
         [SerializeField] public GameObject gun;
         [SerializeField] public RatController mainRat;
-        [SerializeField] public float originalRatSpeed;
+        [SerializeField] public PlayerID PlayerID;
+        [SerializeField] public Rigidbody2D rb2d;
+        [SerializeField] public TMP_Text keyCounter;
+        [SerializeField] public Animator animator;
+        [SerializeField] public SpriteRenderer sr;
+        public List<GameObject> ratsInRange = new();
+        public TwoPlayerCamera twoPlayerCamera;
 
-        [SerializeField] public bool gateOpen = false;
-        [SerializeField] public bool gunActive = false;
-        [SerializeField] private bool opened;
-        [SerializeField] private bool attackReady;
-        [SerializeField] public float attackCooldown;
-        [SerializeField] private float attackTimer;
-        [SerializeField] private bool slowReady;
-        [SerializeField] public float slowCooldown;
-        [SerializeField] private float slowTimer;
-        [SerializeField] private bool ratSlowed;
-        [SerializeField] private float ratSlowTimer;
-        [SerializeField] public float ratSlowDuration;
-        [SerializeField] public float ratSlowSpeed;
-        [SerializeField] public float keysCollected;
+        [Header("Doug Attributes")]
         [SerializeField] public float dougSpeed;
         [SerializeField] public float iFrames;
         [SerializeField] public float iFramesMax;
         [SerializeField] public bool invincible;
         [SerializeField] public float dougHealth;
-        [SerializeField] public PlayerID PlayerID;
-        [SerializeField] public Rigidbody2D rb2d;
-        [SerializeField] private float bulletSpeed = 10f;
-        [SerializeField] private UnityEngine.Vector2 lastDirection = UnityEngine.Vector2.right;
+        [SerializeField] public float attackCooldown;
+        [SerializeField] private bool attackReady;
+        [SerializeField] private float attackTimer;
+        [SerializeField] private bool slowReady;
+        [SerializeField] public float slowCooldown;
+        [SerializeField] private float slowTimer;
 
+
+        [Header("Key, Door and Gun")]
+        [SerializeField] public float keysCollected;
+        [SerializeField] public bool gateOpen = false;
+        [SerializeField] public bool gunActive = false;
+        [SerializeField] private bool opened;
         [SerializeField] public float offsetRange = 1f;
         [SerializeField] private bool isFiring;
         [SerializeField] private int fireCount;
-        [SerializeField] public List<GameObject> ratsInRange = new();
-        public TwoPlayerCamera twoPlayerCamera;
-        [SerializeField] public TMP_Text keyCounter;
-        [SerializeField] public Animator animator;
-        [SerializeField] public SpriteRenderer sr;
+        [SerializeField] private float bulletSpeed = 10f;
+        [SerializeField] private UnityEngine.Vector2 lastDirection = UnityEngine.Vector2.right;
+
+
+
+        [Header("Rat and Misc.")]
+
+        [SerializeField] public float originalRatSpeed;
+        [SerializeField] private bool ratSlowed;
+        [SerializeField] private float ratSlowTimer;
+        [SerializeField] public float ratSlowDuration;
+        [SerializeField] public float ratSlowSpeed;
         public bool lastFlip;
         public bool defeated = false;
         public bool canMove = true;
@@ -82,6 +90,8 @@ namespace MiniGameCollection.Games2025.Team06
                 animator.SetBool("defeated", true);
                 canMove = false;
             }
+
+            //Movement
             if (canMove)
             {
                 float axisX = ArcadeInput.Players[(int)PlayerID].AxisX;
@@ -91,6 +101,8 @@ namespace MiniGameCollection.Games2025.Team06
                 rb2d.velocity = movementInput * dougSpeed;
             }
 
+
+            //Animation
             animator.SetFloat("velocity", Math.Abs(rb2d.velocity.x + rb2d.velocity.y));
 
             if (rb2d.velocity.x > 0)
@@ -107,9 +119,12 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 sr.flipX = lastFlip;
             }
-            
+
+            //
+
             ratsInRange.RemoveAll(go => go == null);
 
+            //Bite
             if (ArcadeInput.Players[(int)PlayerID].Action1.Pressed)
             {
                 Chomp();
@@ -117,6 +132,7 @@ namespace MiniGameCollection.Games2025.Team06
                 //AUDIO GOES HERE
             }
 
+            //Bark
             if (ArcadeInput.Players[(int)PlayerID].Action2.Pressed)
             {
                 Bark();
@@ -124,6 +140,7 @@ namespace MiniGameCollection.Games2025.Team06
                 //AUDIO GOES HERE
             }
 
+            //Shooting
             if (isFiring)
             {
                 fireCount++;
@@ -140,7 +157,6 @@ namespace MiniGameCollection.Games2025.Team06
 
             //Key UI
             keyCounter.text = "x" + keysCollected;
-
 
             //Attack timer logic
             if (!attackReady)
@@ -174,6 +190,10 @@ namespace MiniGameCollection.Games2025.Team06
                     ratSlowTimer = 0;
                 }
             }
+            else if (!ratSlowed)
+            {
+                originalRatSpeed = mainRat.ratSpeed;
+            }
 
             //IFrame timer logic
             if (invincible)
@@ -186,18 +206,12 @@ namespace MiniGameCollection.Games2025.Team06
                 }
             }
 
-            else if (!ratSlowed)
+            //Gun activation logic
+            if (gunActive)
             {
-                originalRatSpeed = mainRat.ratSpeed;
+                gun.SetActive(true);
             }
 
-            //Gun activation logic
-                if (gunActive)
-                {
-                    gun.SetActive(true);
-                }
-
-            
         }
 
         void Chomp()
@@ -294,20 +308,16 @@ namespace MiniGameCollection.Games2025.Team06
         {
             if (slowReady && ratsInRange.Count > 0)
             {
-
                 //Reseting attack timer
                 ratSlowed = true;
-
                 slowReady = false;
                 slowTimer = 0;
                 Debug.Log("Bark hits");
             }
-
             else
             {
                 Debug.Log("Bark Misses");
             }
-
         }
 
         void Fire()
@@ -333,7 +343,6 @@ namespace MiniGameCollection.Games2025.Team06
             bulletRb.velocity = rb2d.velocity + dir.normalized * bulletSpeed;
         }
 
-
         void Defeat()
         {
             Debug.Log("doug death");
@@ -346,17 +355,13 @@ namespace MiniGameCollection.Games2025.Team06
         {
             if (collision.GetComponent<RatTag>() != null)
             {
-
-
                 //Bite Logic
                 GameObject rat = collision.gameObject;
                 if (!ratsInRange.Contains(rat)) //prevents adding collided rat twice
                 {
                     ratsInRange.Add(rat);   //adding collided rat to ratsInRange list
-
                 }
             }
-
             if (collision.gameObject.name == "2025-team06-gun")
             {
                 gunActive = true;
@@ -373,22 +378,19 @@ namespace MiniGameCollection.Games2025.Team06
 
         void OnTriggerStay2D(Collider2D collision)
         {
-            if(collision.GetComponent<RatTag>() != null)
+            if (collision.GetComponent<RatTag>() != null)
             {
                 //Damage Logic
-                
-                    if(!invincible)
-                    {
-                        dougHealth -= 0.1f * ratsInRange.Count;
-                        invincible = true;
-                        Debug.Log("Douglas has " + dougHealth + "HP");
-                    }
-                
-                
+                if (!invincible)
+                {
+                    dougHealth -= 0.1f * ratsInRange.Count;
+                    invincible = true;
+                    Debug.Log("Douglas has " + dougHealth + "HP");
+                }
             }
         }
     }
-    
-        
+
+
 
 }
