@@ -22,6 +22,10 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public TMP_Text keyCounter;
         [SerializeField] public Animator animator;
         [SerializeField] public SpriteRenderer sr;
+        [SerializeField] public AudioClip dogBite;
+        [SerializeField] public AudioClip ratBite;
+        [SerializeField] public AudioClip dogBark;
+        [SerializeField] public AudioSource dougSource;
         public List<GameObject> ratsInRange = new();
         public TwoPlayerCamera twoPlayerCamera;
 
@@ -131,15 +135,12 @@ namespace MiniGameCollection.Games2025.Team06
             {
                 Chomp();
 
-                //AUDIO GOES HERE
             }
 
             //Bark
             if (ArcadeInput.Players[(int)PlayerID].Action2.Pressed)
             {
                 Bark();
-
-                //AUDIO GOES HERE
             }
 
             //Shooting
@@ -220,6 +221,9 @@ namespace MiniGameCollection.Games2025.Team06
         {
             if (!gunActive && attackReady && ratsInRange.Count > 0 && mainRat != null)
             {
+                //AUDIO GOES HERE
+                dougSource.PlayOneShot(dogBite);
+                //------------------
                 if (ratsInRange[0] == mainRat)
                 {
                     GameObject rat = ratsInRange[1];
@@ -315,6 +319,9 @@ namespace MiniGameCollection.Games2025.Team06
                 slowReady = false;
                 slowTimer = 0;
                 Debug.Log("Bark hits");
+                //AUDIO GOES HERE
+                dougSource.PlayOneShot(dogBark);
+                //---------------
             }
             else
             {
@@ -388,6 +395,7 @@ namespace MiniGameCollection.Games2025.Team06
                     dougHealth -= 0.1f * ratsInRange.Count;
                     invincible = true;
                     Debug.Log("Douglas has " + dougHealth + "HP");
+                    dougSource.PlayOneShot(ratBite);
                 }
             }
         }
