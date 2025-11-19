@@ -40,4 +40,9 @@ Additionally, Defender Douglas can be evolved into an arcade style local multipl
 
 This minigame acts as a proving ground that "Defender Douglas" can act as a mascot character for a series of quick and fun arcade minigames.
 
+## Citation:
+Brackeys - Multiple Target Camera ( https://www.youtube.com/watch?v=aLpixrPvlB8 ) - We altered the code to work for the pixel perfect camera.
+
+## Game Loop Image
+Image is broken because it was too large to add to GitHub fork. Please check your email, or ask for it to be submitted another way!
 !(../Team06/Documentation/images/2025-team06-DefenderDouglasGameLoop-Image.png)
