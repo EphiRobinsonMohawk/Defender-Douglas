@@ -28,6 +28,7 @@ namespace MiniGameCollection.Games2025.Team06
         [SerializeField] public AudioSource dougSource;
         public List<GameObject> ratsInRange = new();
         public TwoPlayerCamera twoPlayerCamera;
+        [SerializeField] public GameObject gunToCamera;
 
         [Header("Doug Attributes")]
         [SerializeField] public float dougSpeed;
@@ -70,6 +71,7 @@ namespace MiniGameCollection.Games2025.Team06
 
         void Start()
         {
+            gunToCamera = GameObject.Find("2025-team06-gun");
             twoPlayerCamera = FindAnyObjectByType<TwoPlayerCamera>();
         }
         // Update is called once per frame
@@ -78,7 +80,7 @@ namespace MiniGameCollection.Games2025.Team06
             //Gate Logic
             if (gateOpen && !opened)
             {
-                GameObject gunToCamera = GameObject.Find("2025-team06-gun");
+                gunToCamera = GameObject.Find("2025-team06-gun");
                 twoPlayerCamera.targets.Add(gunToCamera.transform);
                 fence.SetActive(false);
                 opened = true;
@@ -213,6 +215,8 @@ namespace MiniGameCollection.Games2025.Team06
             if (gunActive)
             {
                 gun.SetActive(true);
+
+                twoPlayerCamera.targets.Remove(gunToCamera.transform);
             }
 
         }
