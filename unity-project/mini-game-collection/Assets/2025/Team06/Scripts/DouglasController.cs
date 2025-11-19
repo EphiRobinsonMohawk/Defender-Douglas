@@ -79,8 +79,7 @@ namespace MiniGameCollection.Games2025.Team06
         {
             //Gate Logic
             if (gateOpen && !opened)
-            {
-                gunToCamera = GameObject.Find("2025-team06-gun");
+            {             
                 twoPlayerCamera.targets.Add(gunToCamera.transform);
                 fence.SetActive(false);
                 opened = true;
@@ -215,8 +214,7 @@ namespace MiniGameCollection.Games2025.Team06
             if (gunActive)
             {
                 gun.SetActive(true);
-
-                twoPlayerCamera.targets.Remove(gunToCamera.transform);
+                
             }
 
         }
@@ -377,7 +375,9 @@ namespace MiniGameCollection.Games2025.Team06
             }
             if (collision.gameObject.name == "2025-team06-gun")
             {
+                twoPlayerCamera.targets.Remove(gunToCamera.transform);
                 gunActive = true;
+                Destroy(collision.gameObject);
             }
         }
 

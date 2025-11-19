@@ -11,7 +11,7 @@ namespace MiniGameCollection.Games2025.Team06
         {
             if (collision.gameObject.name == "2025-team06-douglas")
             {
-                Destroy(gameObject);
+               // Destroy(gameObject);
             }
         }
     }
