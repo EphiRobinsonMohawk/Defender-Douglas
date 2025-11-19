@@ -33,7 +33,7 @@ namespace MiniGameCollection.Games2025.Team06
             }
             else
             {
-                miniGameManager.Winner = MiniGameWinner.Unset;
+                miniGameManager.Winner = MiniGameWinner.Player2;
                 Debug.Log("Victory Con not met, rat is " + rat.defeated + "dog is " + douglas.defeated);
             }
         }

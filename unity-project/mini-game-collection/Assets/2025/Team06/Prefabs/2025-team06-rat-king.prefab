@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5872220351437482732}
   - component: {fileID: 8015006669187859896}
   - component: {fileID: 1009815045788387593}
-  - component: {fileID: 2500358159659820564}
   m_Layer: 0
   m_Name: 2025-team06-rat-king
   m_TagString: Untagged
@@ -165,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MiniGameManager>k__BackingField: {fileID: 0}
-  canEat: 0
   animator: {fileID: 1009815045788387593}
   twoPlayerCamera: {fileID: 0}
   ratSpeed: 4
@@ -174,12 +172,14 @@ MonoBehaviour:
   followerPrefab: {fileID: 1500042548940459533, guid: 2500c303d5d001047a38fd10d9a7c9be,
     type: 3}
   sr: {fileID: 852654299732870026}
+  ratCounter: {fileID: 0}
+  foodToEat: {fileID: 0}
+  canEat: 0
   ratCount: 0
   defeated: 0
   deathAnim: 0
-  ratCounter: {fileID: 0}
-  foodToEat: {fileID: 0}
   canMove: 1
+  lastFlip: 0
 --- !u!114 &8015006669187859896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,15 +214,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2500358159659820564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677967197254310563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6647c9fe1cad7ef40be02eacf5e54b9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

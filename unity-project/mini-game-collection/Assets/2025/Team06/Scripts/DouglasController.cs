@@ -74,6 +74,8 @@ namespace MiniGameCollection.Games2025.Team06
             //Gate Logic
             if (gateOpen && !opened)
             {
+                GameObject gunToCamera = GameObject.Find("2025-team06-gun");
+                twoPlayerCamera.targets.Add(gunToCamera.transform);
                 fence.SetActive(false);
                 opened = true;
             }
