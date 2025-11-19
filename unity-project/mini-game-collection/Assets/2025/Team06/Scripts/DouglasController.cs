@@ -312,7 +312,7 @@ namespace MiniGameCollection.Games2025.Team06
 
         void Bark()
         {
-            if (slowReady && ratsInRange.Count > 0)
+            if (slowReady)
             {
                 //Reseting attack timer
                 ratSlowed = true;
